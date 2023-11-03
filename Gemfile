@@ -98,4 +98,4 @@ gem 'pundit', '~> 2.3'
 
 gem 'paper_trail', '~> 15.1'
 
-gem "tailwindcss-rails", "~> 2.0"
+gem 'tailwindcss-rails', '~> 2.0'
