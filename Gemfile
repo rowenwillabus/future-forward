@@ -76,6 +76,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'launchy', '~> 2.5'
   gem 'pundit-matchers', '~> 3.1'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
