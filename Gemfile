@@ -93,3 +93,5 @@ gem 'datagrid', '~> 1.7'
 gem 'kaminari', '~> 1.2'
 
 gem 'pundit', '~> 2.3'
+
+gem 'paper_trail', '~> 15.1'
