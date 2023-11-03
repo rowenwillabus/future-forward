@@ -85,3 +85,5 @@ gem 'devise', '~> 4.9'
 gem 'pg'
 
 gem 'faker', '~> 3.2'
+
+gem 'datagrid', '~> 1.7'
