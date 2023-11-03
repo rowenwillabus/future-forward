@@ -89,3 +89,5 @@ gem 'faker', '~> 3.2'
 gem 'datagrid', '~> 1.7'
 
 gem 'kaminari', '~> 1.2'
+
+gem 'pundit', '~> 2.3'
