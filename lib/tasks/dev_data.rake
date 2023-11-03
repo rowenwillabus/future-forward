@@ -4,6 +4,6 @@ namespace :dev_data do
 
   task users: :environment do
     puts 'Creating users'
-    # User.create!(email: 'admin@example.org', password: 'password')
+    User.create!(email: 'admin@example.org', password: 'password', first_name: 'Admin', last_name: 'Admin')
   end
 end
