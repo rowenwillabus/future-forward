@@ -1,0 +1,54 @@
+require: rubocop-rspec
+AllCops:
+  SuggestExtensions: false
+  NewCops: enable
+  Exclude:
+    - "vendor/**/*"
+    - "spec/fixtures/**/*"
+    - "tmp/**/*"
+    - ".git/**/*"
+    - "bin/*"
+    - "db/schema.rb"
+    - "config/initializers/*"
+Metrics/AbcSize:
+  Exclude:
+    - "db/migrate/*.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "config/routes.rb"
+    - "config/environments/development.rb"
+    - "lib/tasks/*.rake"
+Metrics/MethodLength:
+  Exclude:
+    - "db/migrate/*.rb"
+    - "app/controllers/*.rb"
+    - "app/controllers/*/*.rb"
+    - "app/controllers/*/*/*.rb"
+Style/FrozenStringLiteralComment:
+  Enabled: false
+RSpec/ImplicitExpect:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+RSpec/ContextWording:
+  Enabled: false
+Lint/ShadowingOuterLocalVariable:
+  Exclude:
+    - "spec/rails_helper.rb"
+RSpec/ExampleLength:
+  Exclude:
+    - "spec/features/reset_password_spec.rb"
+    - "spec/views/*/*.rb"
+RSpec/NoExpectationExample:
+  Enabled: false
+RSpec/Rails/InferredSpecType:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Exclude:
+    - "spec/requests/tenders_spec.rb"
+RSpec/MultipleExpectations:
+  Exclude:
+    - "spec/**/**/*.rb"
+FactoryBot/FactoryAssociationWithStrategy:
+  Exclude:
+    - "spec/factories/*.rb"
