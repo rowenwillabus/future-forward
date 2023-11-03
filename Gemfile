@@ -79,3 +79,5 @@ group :test do
   gem 'simplecov', require: false, group: :test
   gem 'simplecov-cobertura'
 end
+
+gem 'devise', '~> 4.9'
