@@ -100,7 +100,7 @@ rspec:
     - gem install bundler
     - bundle config set --local path 'vendor/bundle'
     - bundle install
-    - npm install
+    # - npm install
     - bundle exec rake db:migrate RAILS_ENV=test
     - bundle exec rake assets:precompile RAILS_ENV=test
     - bundle exec rspec
