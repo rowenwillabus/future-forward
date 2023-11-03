@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'simplecov-cobertura'
+require 'pundit/matchers'
 
 SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 SimpleCov.start 'rails'
