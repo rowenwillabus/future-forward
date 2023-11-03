@@ -50,7 +50,15 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'brakeman'
+  gem 'bundler-audit', require: false
+  gem 'capybara-email'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'rubocop', '~> 1.57'
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do
@@ -68,6 +76,11 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false, group: :test
+  gem 'simplecov-cobertura'
 end
 
-gem 'rubocop', '~> 1.57'
+gem 'devise', '~> 4.9'
+gem 'pg'
+
+gem 'faker', '~> 3.2'
