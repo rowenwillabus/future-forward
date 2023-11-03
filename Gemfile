@@ -54,6 +54,7 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'capybara-email'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 6.0.0'
   gem 'rubocop', '~> 1.57'
   gem 'rubocop-rails', require: false
