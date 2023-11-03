@@ -38,3 +38,6 @@
 /config/master.key
 
 erd.pdf
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
