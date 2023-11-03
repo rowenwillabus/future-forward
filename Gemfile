@@ -54,6 +54,10 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'capybara-email'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'rubocop', '~> 1.57'
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do
@@ -72,5 +76,3 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
 end
-
-gem 'rubocop', '~> 1.57'
