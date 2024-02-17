@@ -70,9 +70,6 @@ rspec:
     - bundle exec rspec
   coverage: '/\(\d+.\d+\%\) covered/'
   artifacts:
-    name: erd
-    paths:
-      - erd.pdf
     reports:
       coverage_report:
         coverage_format: cobertura
