@@ -21,8 +21,6 @@ stages:
   services:
     - postgres:latest
   variables:
-    POSTGRES_DB: project_test
-    POSTGRES_USER: postgres
     RAILS_ENV: test
   before_script:
     - export APT_CACHE_DIR=`pwd`/apt-cache && mkdir -pv $APT_CACHE_DIR
@@ -56,8 +54,6 @@ rspec:
   services:
     - postgres:latest
   variables:
-    POSTGRES_DB: gwi_test
-    POSTGRES_USER: postgres
     POSTGRES_HOST_AUTH_METHOD: trust
   cache:
     key: ${CI_COMMIT_REF_SLUG}
