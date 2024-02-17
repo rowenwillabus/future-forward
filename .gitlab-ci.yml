@@ -45,7 +45,6 @@ rubocop:
       - vendor
     policy: pull
   script:
-    - bundle config set --local path 'vendor/bundle'
     - bundle install
     - bundle exec rubocop
 
@@ -89,7 +88,6 @@ brakeman:
     paths:
       - brakeman/
   script:
-    - bundle config set --local path 'vendor/bundle'
     - bundle install
     - bundle exec brakeman --format html -o brakeman/index.html
 
@@ -102,6 +100,5 @@ bundle_audit:
       - vendor/
     policy: pull
   script:
-    - bundle config set --local path 'vendor/bundle'
     - bundle install
     - bundle exec bundle audit check --update
