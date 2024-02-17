@@ -4,13 +4,21 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 gem 'bootsnap', require: false
+gem 'datagrid', '~> 1.7'
+gem 'devise', '~> 4.9'
+gem 'faker', '~> 3.2'
 gem 'importmap-rails'
 gem 'jbuilder'
+gem 'kaminari', '~> 1.2'
+gem 'paper_trail', '~> 15.1'
+gem 'pg'
 gem 'puma', '~> 5.0'
+gem 'pundit', '~> 2.3'
 gem 'rails', '~> 7.1.1'
 gem 'sprockets-rails'
 gem 'sqlite3', '~> 1.4'
 gem 'stimulus-rails'
+gem 'tailwindcss-rails', '~> 2.3'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -41,12 +49,3 @@ group :test do
   gem 'simplecov', require: false, group: :test
   gem 'simplecov-cobertura'
 end
-
-gem 'datagrid', '~> 1.7'
-gem 'devise', '~> 4.9'
-gem 'faker', '~> 3.2'
-gem 'kaminari', '~> 1.2'
-gem 'paper_trail', '~> 15.1'
-gem 'pg'
-gem 'pundit', '~> 2.3'
-gem 'tailwindcss-rails', '~> 2.3'
