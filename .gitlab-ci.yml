@@ -1,12 +1,32 @@
-image: ruby:3.2.2
+image: intellectstorm/ruby-postgres-npm
 
 stages:
   - build
   - test
 
-.base_minimal:
-  image: alpine:latest
-  cache: {}
+.base:
+  image: intellectstorm/ruby-postgres-npm
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - apt-cache/
+      - vendor/
+    policy: pull
+  before_script:
+    - gem install bundler --no-document
+    - bundle install --jobs $(nproc) "${FLAGS[@]}" --path=vendor
+
+.base_db:
+  extends: .base
+  services:
+    - postgres:16
+  variables:
+    RAILS_ENV: test
+  before_script:
+    - export APT_CACHE_DIR=`pwd`/apt-cache && mkdir -pv $APT_CACHE_DIR
+    - apt-get update -qq && apt-get -o dir::cache::archives="$APT_CACHE_DIR" install -yqq nodejs
+    - gem install bundler --no-document
+    - bundle install --jobs $(nproc) "${FLAGS[@]}" --path=vendor
 
 install:
   stage: build
@@ -15,26 +35,7 @@ install:
     paths:
       - vendor/
   script:
-    - gem install bundler --no-document
-    - bundle config set --local path 'vendor/bundle'
     - bundle install -j $(nproc)
-
-generate_data:
-  stage: test
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - vendor
-    policy: pull
-  script:
-    - apt-get update
-    - apt-get install -y -qq graphviz npm
-    - gem install bundler
-    - bundle config set --local path 'vendor/bundle'
-    - bundle install
-    - bundle exec rake db:migrate
-    - bundle exec rake db:seed
-    - bundle exec rake dev_data:all
 
 rubocop:
   stage: test
@@ -44,10 +45,34 @@ rubocop:
       - vendor
     policy: pull
   script:
-    - gem install bundler
-    - bundle config set --local path 'vendor/bundle'
     - bundle install
     - bundle exec rubocop
+
+rspec:
+  stage: test
+  services:
+    - postgres:16
+  variables:
+    POSTGRES_HOST_AUTH_METHOD: trust
+    RAILS_ENV: test
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - vendor/
+    policy: pull
+  script:
+    - npm install
+    - bundle install
+    - bundle exec rake db:create
+    - bundle exec rake db:migrate
+    - bundle exec rake assets:precompile
+    - bundle exec rspec
+  coverage: '/\(\d+.\d+\%\) covered/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/coverage.xml
 
 brakeman:
   stage: test
@@ -62,11 +87,7 @@ brakeman:
     when: always
     paths:
       - brakeman/
-  # only:
-  #   - master
   script:
-    - gem install bundler
-    - bundle config set --local path 'vendor/bundle'
     - bundle install
     - bundle exec brakeman --format html -o brakeman/index.html
 
@@ -79,37 +100,5 @@ bundle_audit:
       - vendor/
     policy: pull
   script:
-    - gem install bundler
-    - bundle config set --local path 'vendor/bundle'
     - bundle install
-    - bundle exec bundle audit check --update --ignore=GHSA-2qc6-mcvw-92cw
-      #  rules:
-      #    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      #      changes:
-      #        - Gemfile
-rspec:
-  stage: test
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - vendor/
-    policy: pull
-  script:
-    - apt-get update
-    - apt-get install -y -qq graphviz npm
-    - gem install bundler
-    - bundle config set --local path 'vendor/bundle'
-    - bundle install
-    - npm install
-    - bundle exec rake db:migrate RAILS_ENV=test
-    - bundle exec rake assets:precompile RAILS_ENV=test
-    - bundle exec rspec
-  coverage: '/\(\d+.\d+\%\) covered/'
-  artifacts:
-    name: erd
-    paths:
-      - erd.pdf
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage/coverage.xml
+    - bundle exec bundle audit check --update

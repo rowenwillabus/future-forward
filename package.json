@@ -7,16 +7,12 @@
     "lib": "lib",
     "test": "test"
   },
-  "dependencies": {
-    "flowbite": "^2.3.0"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@gitlab.com:intellectstorm/teams/rails-scaffold.git"
-  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "flowbite": "^2.3.0"
+  }
 }
