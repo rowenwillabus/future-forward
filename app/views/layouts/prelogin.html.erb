@@ -8,10 +8,9 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
   </head>
   <body>
-    <main class="container mx-auto my-8 px-5 flex flex-col gap-5">
+    <main class="h-screen mx-auto">
       <% if notice.present? || alert.present? %>
         <% notice_colour = notice.present? ? "green" : "red" %>
         <% notice_id = notice.present? ? "notice" : "alert" %>
@@ -27,10 +26,6 @@
           </button>
         </div>
       <% end %>
-      <%# user name %>
-      <div class="flex justify-center mb-5">
-        <%#= image_tag asset_path("logo.png"), class: "h-24", alt: "Logo" %>
-      </div>
       <%= yield %>
     </main>
   </body>
