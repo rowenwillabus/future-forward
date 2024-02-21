@@ -95,6 +95,15 @@
   </body>
 </html>
 <script>
+  document.addEventListener("turbo:load", function() {
+    setInterval(() => {
+      dismissAlert("notice");
+      dismissAlert("alert");
+
+    }, 3000);
+
+  })
+
   function dismissAlert(alertId) {
     var alertElement = document.getElementById(alertId);
     if (alertElement) {
