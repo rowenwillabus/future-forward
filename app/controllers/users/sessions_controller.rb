@@ -16,9 +16,11 @@ module Users
     # end
 
     # DELETE /resource/sign_out
-    # def destroy
-    #   super
-    # end
+    def destroy
+      super do
+        return redirect_to '/users/sign_in', status: :see_other, alert: 'You have been logged out'
+      end
+    end
 
     # protected
 
