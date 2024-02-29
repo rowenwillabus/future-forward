@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_161507) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_29_230127) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "electors", force: :cascade do |t|
+    t.integer "id_number"
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "division_number"
+    t.string "division_name"
+    t.string "laa_name"
+    t.string "constituency_name"
+    t.string "address"
+    t.string "occupation"
+    t.integer "constituency_number"
+    t.integer "number_in_division"
+    t.bigint "list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_electors_on_list_id"
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
@@ -38,4 +63,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_161507) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "electors", "lists"
 end

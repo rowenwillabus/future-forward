@@ -1,0 +1,67 @@
+<div id="<%= dom_id elector %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Id number:</strong>
+    <%= elector.id_number %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">First name:</strong>
+    <%= elector.first_name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Middle name:</strong>
+    <%= elector.middle_name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Last name:</strong>
+    <%= elector.last_name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Division number:</strong>
+    <%= elector.division_number %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Division name:</strong>
+    <%= elector.division_name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Laa name:</strong>
+    <%= elector.laa_name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Constituency name:</strong>
+    <%= elector.constituency_name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Address:</strong>
+    <%= elector.address %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Occupation:</strong>
+    <%= elector.occupation %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Constituency number:</strong>
+    <%= elector.constituency_number %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Number in division:</strong>
+    <%= elector.number_in_division %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this elector", elector, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this elector", edit_elector_path(elector), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
