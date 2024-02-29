@@ -14,7 +14,7 @@ orientation: vertical
 polymorphism: false
 sort: false
 warn: false
-title: PROJECT NAME
+title: FFWD
 exclude: PaperTrail::Version, PaperTrail::VersionAssociation
 only: null
 only_recursion_depth: null
