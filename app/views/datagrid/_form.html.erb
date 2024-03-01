@@ -1,14 +1,20 @@
 <%= form_for grid, options do |f| -%>
-  <% grid.filters.each do |filter| %>
-    <div class="datagrid-filter filter">
-      <%= f.datagrid_label filter %>
-      <%= f.datagrid_filter filter %>
-    </div>
-  <% end %>
-  <div class="datagrid-actions">
-    <%= f.submit I18n.t("datagrid.form.search").html_safe, :class => "datagrid-submit" %>
+  <div class="grid grid-cols-12 gap-4 lg:gap-8">
+    <% grid.filters.each do |filter| %>
+      <div class="datagrid-filter filter relative col-span-12 md:col-span-6 lg:col-span-3">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+          <% if filter.type &&  filter.type["string"] %>
+          <% else %>
+          <% end %>
+        </div>
+        <%= f.datagrid_filter filter, placeholder: filter.options[:placeholder], :class=> "block p-2 pl-10 w-full text-sm rounded-lg border border-gray-300 " %>
+      </div>
+    <% end %>
+  </div>
+  <div class="datagrid-actions inline">
+    <%= f.submit I18n.t("datagrid.form.search").html_safe, :class => "datagrid-submit inline-flex justify-center items-center mb-6 my-2 mr-2 px-4 py-1 text-sm font-light text-center text-black bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-gray-200" %>
     <%# https://github.com/rails/rails/pull/14949 -%>
     <% empty_parameter = Rails.version >= "4.1.0" && Rails.version <= '4.1.2' ? nil : {}-%>
-    <%= link_to I18n.t('datagrid.form.reset').html_safe, url_for(grid.to_param => empty_parameter), :class => "datagrid-reset" %>
+    <%= link_to I18n.t('datagrid.form.reset').html_safe, url_for(grid.to_param => empty_parameter), :class => "datagrid-reset datagrid-submit inline-flex justify-center items-center my-2 mr-2 px-4 py-1 text-sm font-light text-center text-black bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-gray-200" %>
   </div>
 <% end -%>

@@ -4,6 +4,9 @@ class ElectorsController < ApplicationController
   # GET /electors or /electors.json
   def index
     @electors = Elector.all
+    @grid = ElectorsGrid.new(grid_params) do |scope|
+      scope.page(params[:page])
+    end
   end
 
   # GET /electors/1 or /electors/1.json
@@ -53,6 +56,12 @@ class ElectorsController < ApplicationController
       format.html { redirect_to electors_url, notice: 'Elector was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  protected
+
+  def grid_params
+    params.fetch(:electors_grid, {}).permit!
   end
 
   private

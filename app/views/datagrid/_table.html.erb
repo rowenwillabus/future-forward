@@ -5,18 +5,22 @@ Local variables:
 * options - passed options Hash
 %>
 <% if grid.html_columns(*options[:columns]).any? %>
-  <%= content_tag :table, options[:html] do %>
-    <thead>
-      <%= datagrid_header(grid, options) %>
-    </thead>
-    <tbody>
-      <% if assets.any? %>
-        <%= datagrid_rows(grid, assets, **options) %>
-      <% else %>
-        <tr><td class="noresults" colspan="100%"><%= I18n.t('datagrid.no_results').html_safe %></td></tr>
-      <% end %>
-    </tbody>
-  <% end %>
+  <div class="overflow-x-auto relative shadow-md rounded-lg mt-2">
+    <%= content_tag :table, options[:html] do %>
+      <thead class="font-bold uppercase text-slate-400 text-xxs opacity-70">
+        <%= datagrid_header(grid, options) %>
+      </thead>
+      <tbody>
+        <% if assets.any? %>
+          <%= datagrid_rows(grid, assets, **options) %>
+        <% else %>
+          <tr>
+            <td class="noresults" colspan="100%"><%= I18n.t('datagrid.no_results').html_safe %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+  </div>
 <% else -%>
   <%= I18n.t("datagrid.table.no_columns").html_safe %>
 <% end %>

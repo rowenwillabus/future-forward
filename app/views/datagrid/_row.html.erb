@@ -1,5 +1,5 @@
-<tr>
+<tr class="<%= cycle('bg-white', 'bg-gray-50') %> text-sm text-gray dark:bg-gray-700 dark:text-gray-400 w-1/6">
   <% grid.html_columns(*options[:columns]).each do |column| %>
-    <td class="<%= datagrid_column_classes(grid, column) %>"><%= datagrid_value(grid, column, asset) %></td>
+    <td class="text-sm font-normal leading-normal py-4 px-6 <%= datagrid_column_classes(grid, column) %>"><%= datagrid_value(grid, column, asset) %></td>
   <% end %>
 </tr>
