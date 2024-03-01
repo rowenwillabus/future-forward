@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+statuses = [
+  'Lives in Division',
+  'Lives in out of division (within Guyana)',
+  'Migrated',
+  'Deceased'
+]
+
+Status.create(statuses.map { |status| { name: status } })

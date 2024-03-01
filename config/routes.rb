@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :responses
+  resources :statuses
   get 'home/index'
 
   # Defines the root path route ("/")

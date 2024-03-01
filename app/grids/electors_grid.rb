@@ -31,7 +31,10 @@ class ElectorsGrid < BaseGrid
            scope.where(constituency_name: value)
          end
 
-  column(:id)
+  column(:actions, html: true) do |model|
+    link_to 'Add Response', new_response_path(elector_id: model.id), class: 'text-green-500'
+  end
+  column(:number_in_division)
   column(:first_name)
   column(:middle_name)
   column(:last_name)
@@ -42,5 +45,4 @@ class ElectorsGrid < BaseGrid
   column(:address)
   column(:occupation)
   column(:constituency_number)
-  column(:number_in_division)
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_29_230127) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_01_001321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_230127) do
   end
 
   create_table "lists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.bigint "elector_id", null: false
+    t.bigint "status_id", null: false
+    t.text "note"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["elector_id"], name: "index_responses_on_elector_id"
+    t.index ["status_id"], name: "index_responses_on_status_id"
+    t.index ["user_id"], name: "index_responses_on_user_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -64,4 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_230127) do
   end
 
   add_foreign_key "electors", "lists"
+  add_foreign_key "responses", "electors"
+  add_foreign_key "responses", "statuses"
+  add_foreign_key "responses", "users"
 end

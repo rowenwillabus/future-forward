@@ -1,0 +1,53 @@
+<%= form_with(model: response, class: "contents") do |form| %>
+  <% if response.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(response.errors.count, "error") %> prohibited this response from being saved:</h2>
+
+      <ul>
+        <% response.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+        <% if params[:elector_id].present? %>
+          <%= form.text_field :elector_id, value: Elector.find(params[:elector_id]).first_name + " " + Elector.find(params[:elector_id]).last_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <% else %>
+      <div class="col-span-12">
+        <%= form.label :elector_id, class: form_label_class  %>
+        <%= form.text_field :elector_id, class: form_text_area_class %>
+      </div>
+    <% end %>
+  </div>
+
+    <div class="my-5">
+    <%= form.label :status_id %>
+    <%= form.select :status_id, options_for_select(Status.all.map { |f| [f.name, f.id] }), { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+    <div class="my-5">
+    <%= form.label :email %>
+    <%= form.text_field :email, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="my-5">
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+
+  <div class="my-5">
+    <%= form.label :note %>
+    <%= form.text_area :note, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.hidden_field :user_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
