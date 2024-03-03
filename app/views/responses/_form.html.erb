@@ -2,7 +2,6 @@
   <% if response.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(response.errors.count, "error") %> prohibited this response from being saved:</h2>
-
       <ul>
         <% response.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,44 +9,72 @@
       </ul>
     </div>
   <% end %>
-
   <div class="my-5">
-        <% if params[:elector_id].present? %>
-          <%= form.text_field :elector_id, value: Elector.find(params[:elector_id]).first_name + " " + Elector.find(params[:elector_id]).last_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <% if params[:elector_id].present? %>
+      <% elector = Elector.find(params[:elector_id]) %>
+    <%= form.select(:elector_id,
+      options_for_select([[elector.first_name + ' ' + elector.last_name, elector.id]], selected: elector.id),
+      { include_blank: false },
+      class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
+    ) %>
     <% else %>
       <div class="col-span-12">
         <%= form.label :elector_id, class: form_label_class  %>
-        <%= form.text_field :elector_id, class: form_text_area_class %>
+        <%= form.number_field :elector_id, class: form_text_area_class %>
       </div>
     <% end %>
   </div>
-
-    <div class="my-5">
+  <div class="my-5">
     <%= form.label :status_id %>
-    <%= form.select :status_id, options_for_select(Status.all.map { |f| [f.name, f.id] }), { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :status_id, options_for_select(Status.all.map { |f| [f.name, f.id] }), { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", id: "status-dropdown" %>
   </div>
-
-    <div class="my-5">
+  <div id="country-dropdown-container" class="my-5">
+    <div class="flex">
+    </div>
+    <%= form.label :country_id, "Country Migrated To", class: form_label_class %>
+    <% countries = Country.all.order(:name).map { |e| [e.name, e.id] } %>
+    <%= form.select(:country_id, options_for_select(countries, @response.country_id), { include_blank: "Select country"}, class: form_select_class, data: { controller: "tom-select"}) %>
+  </div>
+  <div class="my-5">
+    <%= form.label :phone_number %>
+    <%= form.number_field :phone_number, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+  <div class="my-5">
     <%= form.label :email %>
     <%= form.text_field :email, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-    </div>
-
-    <div class="my-5">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-    </div>
-
-
+  </div>
   <div class="my-5">
     <%= form.label :note %>
     <%= form.text_area :note, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
-
-  <div class="my-5">
-    <%= form.hidden_field :user_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var statusDropdown = document.getElementById('status-dropdown');
+    var countryDropdownContainer = document.getElementById('country-dropdown-container');
+
+    // Initial check on page load
+    toggleCountryDropdown();
+
+    // Add an event listener to the status dropdown
+    statusDropdown.addEventListener('change', function() {
+      toggleCountryDropdown();
+    });
+
+    // Function to toggle the visibility of the country dropdown
+    function toggleCountryDropdown() {
+      var selectedStatusText = statusDropdown.options[statusDropdown.selectedIndex].text;
+
+      // Check if the selected status is the one that should display the country dropdown
+      if (selectedStatusText === 'Migrated') {
+        countryDropdownContainer.style.display = 'block'; 
+      } else {
+        countryDropdownContainer.style.display = 'none';
+      }
+    }
+  });
+</script>
