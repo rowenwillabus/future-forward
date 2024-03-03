@@ -37,6 +37,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'htmlbeautifier'
   gem 'rails-erd'
   gem 'web-console'
 end
