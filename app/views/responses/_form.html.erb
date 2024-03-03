@@ -13,7 +13,7 @@
     <% if params[:elector_id].present? %>
       <% elector = Elector.find(params[:elector_id]) %>
     <%= form.select(:elector_id,
-      options_for_select([[elector.first_name + ' ' + elector.last_name, elector.id]], selected: elector.id),
+      options_for_select([[elector.id_number.to_s + ' - ' + elector.first_name + ' ' + elector.last_name + ' (' + elector.division_name + ')', elector.id]], selected: elector.id),
       { include_blank: false },
       class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
     ) %>
