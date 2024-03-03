@@ -1,6 +1,7 @@
 class ElectorsGrid < BaseGrid
   scope do
     Elector
+    # Elector.left_outer_joins(:responses).where(responses: { id: nil })
   end
 
   filter(:first_name, :string, placeholder: 'Search by first name') do |value|
@@ -31,8 +32,17 @@ class ElectorsGrid < BaseGrid
            scope.where(constituency_name: value)
          end
 
+    filter(:division_name,
+         :enum,
+         select: -> { Elector.pluck(:division_name).uniq.sort },
+         multiple: false,
+         include_blank: 'Search by division name') do |value, scope|
+           scope.where(division_name: value)
+         end
+
+
   column(:actions, html: true) do |model|
-    link_to 'Add Response', new_response_path(elector_id: model.id), class: 'text-green-500'
+    link_to 'Add Response', new_response_path(elector_id: model.id), class: 'text-green-500'     if model.responses.none?
   end
   column(:number_in_division)
   column(:first_name)
