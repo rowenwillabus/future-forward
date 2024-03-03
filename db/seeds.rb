@@ -13,3 +13,11 @@ statuses = [
 ]
 
 Status.create(statuses.map { |status| { name: status } })
+
+# Add countries
+require 'csv'
+
+# Add countries
+json = File.read('db/countries.json')
+countries = JSON.parse(json)
+Country.insert_all(countries)

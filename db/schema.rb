@@ -15,7 +15,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_01_001321) do
   enable_extension "plpgsql"
 
   create_table "countries", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.string "iso2"
+    t.string "iso3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -48,6 +50,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_01_001321) do
   create_table "responses", force: :cascade do |t|
     t.bigint "elector_id", null: false
     t.bigint "status_id", null: false
+    t.string "phone_number"
+    t.string "email"
     t.bigint "user_id", null: false
     t.bigint "country_id"
     t.text "note"

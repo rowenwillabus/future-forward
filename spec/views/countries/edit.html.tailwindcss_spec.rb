@@ -1,22 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe "countries/edit", type: :view do
-  let(:country) {
+RSpec.describe 'countries/edit', type: :view do
+  let(:country) do
     Country.create!(
-      name: "MyString"
+      name: 'MyString'
     )
-  }
+  end
 
-  before(:each) do
+  before do
     assign(:country, country)
   end
 
-  it "renders the edit country form" do
+  it 'renders the edit country form' do
     render
 
-    assert_select "form[action=?][method=?]", country_path(country), "post" do
-
-      assert_select "input[name=?]", "country[name]"
+    assert_select 'form[action=?][method=?]', country_path(country), 'post' do
+      assert_select 'input[name=?]', 'country[name]'
     end
   end
 end
