@@ -24,6 +24,7 @@ gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
+  gem 'annotate'
   gem 'brakeman'
   gem 'bundler-audit', require: false
   gem 'capybara-email'
