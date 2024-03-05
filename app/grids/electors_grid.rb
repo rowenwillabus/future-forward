@@ -32,7 +32,7 @@ class ElectorsGrid < BaseGrid
          end
 
   column(:actions, html: true) do |model|
-    link_to 'Add Response', new_response_path(elector_id: model.id), class: 'text-green-500'
+    link_to 'Add Response', new_response_path(elector_id: model.id), class: 'text-green-500' if model.responses.empty?
   end
   column(:number_in_division)
   column(:first_name)
