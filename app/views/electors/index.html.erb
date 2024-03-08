@@ -1,3 +1,47 @@
+<div class="flex gap-4">
+    <div class="grid grid-cols-3 py-10">
+      <%# total registrations %>
+      <div class="col-span-1 w-full  text-white bg-gradient-to-l from-blue-300 to-blue-400 rounded-lg p-6 text-center shadow-lg">
+        <h2 class="font-semibold text-sm uppercase mb-4">Total Electors</h2>
+        <span class="text-3xl font-bold"><%= @grid.assets.total_count %></span>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 py-10">
+      <%# total responses %>
+      <div class="col-span-1 w-full  text-white bg-gradient-to-l from-blue-300 to-blue-400 rounded-lg p-6 text-center shadow-lg">
+        <h2 class="font-semibold text-sm uppercase mb-4">Responses</h2>
+        <span class="text-3xl font-bold"><%= @grid.assets.joins(:responses).count %></span>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 py-10">
+      <%# total in division %>
+      <div class="col-span-1 w-full  text-white bg-gradient-to-l from-blue-300 to-blue-400 rounded-lg p-6 text-center shadow-lg">
+        <h2 class="font-semibold text-sm uppercase mb-4">In Division</h2>
+        <span class="text-3xl font-bold"><%= @grid.assets.joins(:responses).where("responses.status_id = 1").count %></span> 
+      </div>
+    </div>
+    <div class="grid grid-cols-3 py-10">
+      <%# total out of division %>
+      <div class="col-span-1 w-full  text-white bg-gradient-to-l from-blue-300 to-blue-400 rounded-lg p-6 text-center shadow-lg">
+        <h2 class="font-semibold text-sm uppercase mb-4">Out of Division</h2>
+        <span class="text-3xl font-bold"><%= @grid.assets.joins(:responses).where("responses.status_id = 2").count %></span> 
+      </div>
+    </div>
+    <div class="grid grid-cols-3 py-10">
+      <%# total out of migrated %>
+      <div class="col-span-1 w-full  text-white bg-gradient-to-l from-blue-300 to-blue-400 rounded-lg p-6 text-center shadow-lg">
+        <h2 class="font-semibold text-sm uppercase mb-4">Migrated</h2>
+        <span class="text-3xl font-bold"><%= @grid.assets.joins(:responses).where("responses.status_id = 3").count %></span> 
+      </div>
+    </div>
+    <div class="grid grid-cols-3 py-10">
+      <%# total out of deceased %>
+      <div class="col-span-1 w-full  text-white bg-gradient-to-l from-blue-300 to-blue-400 rounded-lg p-6 text-center shadow-lg">
+        <h2 class="font-semibold text-sm uppercase mb-4">Deceased</h2>
+        <span class="text-3xl font-bold"><%= @grid.assets.joins(:responses).where("responses.status_id = 4").count %></span> 
+      </div>
+    </div>
+</div>
 <%= datagrid_form_for @grid, :method => :get, :url => electors_path %>
 <%= paginate(@grid.assets) %>
 <%= datagrid_table @grid %>

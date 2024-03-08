@@ -20,6 +20,7 @@ namespace :dev_data do
     # create 100 electors
     100.times do
       electors_array << {
+        id_number: Faker::Number.number(digits: 8),
         first_name: Faker::Name.first_name,
         middle_name: Faker::Name.middle_name,
         last_name: Faker::Name.last_name,
