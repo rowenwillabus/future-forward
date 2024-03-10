@@ -1,9 +1,11 @@
 class ResponsesController < ApplicationController
+
   before_action :set_response, only: %i[show edit update destroy]
 
-  # GET /responses or /responses.json
   def index
-    @responses = Response.all
+    @grid = ResponsesGrid.new(grid_params) do |scope|
+      scope.page(params[:page])
+    end
   end
 
   # GET /responses/1 or /responses/1.json
@@ -59,6 +61,11 @@ class ResponsesController < ApplicationController
     end
   end
 
+  protected
+
+  def grid_params
+    params.fetch(:responses_grid, {}).permit!
+  end
   private
 
   # Use callbacks to share common setup or constraints between actions.
