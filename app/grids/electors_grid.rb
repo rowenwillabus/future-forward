@@ -18,7 +18,7 @@ class ElectorsGrid < BaseGrid
   end
   filter(:laa_name,
          :enum,
-         select: -> { Elector.pluck(:laa_name).uniq.sort },
+         select: -> { Elector.pluck(:laa_name).compact.uniq.sort },
          multiple: false,
          include_blank: 'Search by LAA') do |value, scope|
            scope.where(laa_name: value)
@@ -26,7 +26,7 @@ class ElectorsGrid < BaseGrid
 
   filter(:constituency_name,
          :enum,
-         select: -> { Elector.pluck(:constituency_name).uniq.sort },
+         select: -> { Elector.pluck(:constituency_name).compact.uniq.sort },
          multiple: false,
          include_blank: 'Search by constituency') do |value, scope|
            scope.where(constituency_name: value)
@@ -34,7 +34,7 @@ class ElectorsGrid < BaseGrid
 
     filter(:division_name,
          :enum,
-         select: -> { Elector.pluck(:division_name).uniq.sort },
+         select: -> { Elector.pluck(:division_name).compact.uniq.sort },
          multiple: false,
          include_blank: 'Search by division name') do |value, scope|
            scope.where(division_name: value)
