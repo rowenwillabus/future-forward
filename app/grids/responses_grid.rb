@@ -1,5 +1,4 @@
 class ResponsesGrid < BaseGrid
-
   scope do
     Response
   end
@@ -11,23 +10,23 @@ class ResponsesGrid < BaseGrid
          include_blank: 'Search by status') do |value, scope|
     scope.where(status_id: value)
   end
-  filter(:created_at, :date, :range => true)
+  filter(:created_at, :date, range: true)
 
   column(:id)
   column(:elector) do |model|
-    model.elector.first_name + ' ' + model.elector.last_name
+    "#{model.elector.first_name} #{model.elector.last_name}"
   end
   column(:address) do |model|
     model.elector.address
   end
   column(:division) do |model|
-    model.elector.division_number + ' ' + model.elector.division_name
+    "#{model.elector.division_number} #{model.elector.division_name}"
   end
   column(:status) do |model|
     model.status.name
   end
   column(:submitted_by) do |model|
-    model.user.first_name + ' ' + model.user.last_name
+    "#{model.user.first_name} #{model.user.last_name}"
   end
   column(:note)
   date_column(:created_at)

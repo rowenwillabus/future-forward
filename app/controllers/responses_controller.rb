@@ -1,5 +1,4 @@
 class ResponsesController < ApplicationController
-
   before_action :set_response, only: %i[show edit update destroy]
 
   def index
@@ -66,6 +65,7 @@ class ResponsesController < ApplicationController
   def grid_params
     params.fetch(:responses_grid, {}).permit!
   end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
