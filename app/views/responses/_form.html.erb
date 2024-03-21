@@ -26,7 +26,7 @@
   </div>
   <div class="my-5">
     <%= form.label :status_id %>
-    <%= form.select :status_id, options_for_select(Status.all.map { |f| [f.name, f.id] }), { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", id: "status-dropdown" %>
+    <%= form.select :status_id, options_for_select(Status.all.order(:id).map { |f| [f.name, f.id] }), { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", id: "status-dropdown" %>
   </div>
   <div id="country-dropdown-container" class="my-5">
     <div class="flex">
